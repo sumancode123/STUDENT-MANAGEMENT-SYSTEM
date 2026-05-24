@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Student Management System
 
 A simple command-line student management system written with basic Python and SQLite.
@@ -47,3 +48,6 @@ The web app requires authentication before you can manage students.
 
 - Student data is saved in `students.db` automatically.
 - The app uses Flask and SQLite.
+=======
+# STUDENT-MANAGEMENT-SYSTEM
+>>>>>>> 323a9ba5fef4be5b382b897accc1aefc86c4d4c2
