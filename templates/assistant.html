@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>AI Assistant</h2>
+<p>Ask the assistant for help with managing students, updating profiles, or using the app features.</p>
+<form method="post" style="margin-top: 16px;">
+    <label>Your question
+        <input type="text" name="question" value="{{ question or '' }}" placeholder="e.g. How do I add a student?" required>
+    </label>
+    <button type="submit">Ask Assistant</button>
+</form>
+
+{% if answer %}
+<div style="margin-top: 20px; padding: 16px; border: 1px solid #ddd; border-radius: 6px; background: #f7faff;">
+    <strong>Assistant:</strong>
+    <p>{{ answer }}</p>
+</div>
+{% endif %}
+{% endblock %}

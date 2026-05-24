@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    <label>Username
+        <input type="text" name="username" placeholder="admin" required>
+    </label>
+    <label>Password
+        <input type="password" name="password" placeholder="admin123" required>
+    </label>
+    <button type="submit">Sign In</button>
+</form>
+<p>Default account: <strong>admin</strong> / <strong>admin123</strong></p>
+{% endblock %}

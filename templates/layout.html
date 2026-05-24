@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Student Management System</title>
+    <style>
+        :root { --content-width: 900px; --accent: #1a5a96; }
+        html, body { height: 100%; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: var(--content-width);
+            margin: 30px auto;
+            padding: 0 20px;
+            background-image: url('/static/images/bg.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #222;
+        }
+        /* header transparent so background shows; main/footer have panels for contrast */
+        header { margin-bottom: 18px; background: transparent; padding: 8px 12px; }
+        main, footer { background: rgba(255,255,255,0.92); padding: 12px; border-radius: 6px; }
+        header h1 { margin: 0; font-size: 28px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+        nav a { margin-right: 16px; text-decoration: none; color: var(--accent); }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f4f4f4; }
+        .flash { padding: 12px; margin-bottom: 18px; border-radius: 4px; }
+        .success { background: #e7f7e7; border: 1px solid #b8e0b8; }
+        .error { background: #ffe7e7; border: 1px solid #e0b8b8; }
+        form label { display: block; margin-top: 12px; }
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        button { margin-top: 16px; padding: 10px 18px; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button.secondary { background: #777; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Student Management System</h1>
+    {% if session.user_id %}
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('add_student') }}">Add Student</a>
+        <a href="{{ url_for('assistant') }}">AI Assistant</a>
+        <a href="{{ url_for('change_password') }}">Change Password</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+    <p style="margin-top: 8px; color: #fff;">Logged in as <strong>{{ session.username }}</strong></p>
+    {% endif %}
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<script>
+function speakFlashMessage() {
+    const flash = document.querySelector('.flash');
+    if (!flash || !window.speechSynthesis) return;
+    const message = flash.innerText.trim();
+    if (!message) return;
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+}
+
+window.addEventListener('DOMContentLoaded', speakFlashMessage);
+</script>
+</body>
+</html>

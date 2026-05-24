@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Students</h2>
+<form method="get" style="margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;">
+    <label style="flex: 1; min-width: 220px;">
+        Search
+        <input type="text" name="q" value="{{ search_query or '' }}" placeholder="Name, email, or course">
+    </label>
+    <label style="flex: 1; min-width: 220px;">
+        Course
+        <input type="text" name="course" value="{{ course_filter or '' }}" placeholder="Exact course name">
+    </label>
+    <button type="submit">Filter</button>
+    <a href="{{ url_for('index') }}" style="margin-left: 8px; text-decoration: none; color: #1a5a96;">Clear</a>
+</form>
+
+<div style="display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
+    <div style="padding: 14px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px;">
+        <strong>Total students</strong>
+        <div style="font-size: 1.5rem; margin-top: 6px;">{{ total_students }}</div>
+    </div>
+    <div style="padding: 14px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px;">
+        <strong>Average age</strong>
+        <div style="font-size: 1.5rem; margin-top: 6px;">{{ avg_age }}</div>
+    </div>
+    <div style="padding: 14px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px;">
+        <strong>Average GPA</strong>
+        <div style="font-size: 1.5rem; margin-top: 6px;">{{ avg_gpa }}</div>
+    </div>
+</div>
+
+{% if students %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Age</th>
+            <th>GPA</th>
+            <th>Skills</th>
+            <th>Projects</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.gpa or '' }}</td>
+            <td>{{ student.skills }}</td>
+            <td>{{ student.projects }}</td>
+            <td>
+                <a href="{{ url_for('edit_student', student_id=student.id) }}">Edit</a>
+                <form method="post" action="{{ url_for('delete_student', student_id=student.id) }}" style="display:inline; margin-left: 8px;">
+                    <button type="submit" class="secondary">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No students found yet. Use the Add Student button above to add your first entry.</p>
+{% endif %}
+{% endblock %}

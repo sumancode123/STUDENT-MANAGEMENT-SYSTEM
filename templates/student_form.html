@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="post">
+    <label>Name
+        <input type="text" name="name" value="{{ student.name if student else '' }}" required>
+    </label>
+    <label>Email
+        <input type="email" name="email" value="{{ student.email if student else '' }}" required>
+    </label>
+    <label>Course
+        <input type="text" name="course" value="{{ student.course if student else '' }}" required>
+    </label>
+    <label>Age
+        <input type="number" name="age" value="{{ student.age if student else '' }}" min="1" required>
+    </label>
+    <label>GPA
+        <input type="text" name="gpa" value="{{ student.gpa if student and student.gpa is not none else '' }}" placeholder="e.g. 3.75">
+    </label>
+    <label>Skills (comma separated)
+        <input type="text" name="skills" value="{{ student.skills if student else '' }}" placeholder="e.g. Python, C, ML">
+    </label>
+    <label>Projects (short list)
+        <input type="text" name="projects" value="{{ student.projects if student else '' }}" placeholder="e.g. Chatbot; CRM">
+    </label>
+    <button type="submit">Save</button>
+    <a href="{{ url_for('index') }}"><button type="button" class="secondary">Cancel</button></a>
+</form>
+{% endblock %}
