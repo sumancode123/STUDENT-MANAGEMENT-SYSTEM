@@ -1,14 +1,18 @@
-<<<<<<< HEAD
 # Student Management System
 
-A simple command-line student management system written with basic Python and SQLite.
+A simple Python + SQLite app for managing student records in a browser or from the terminal.
 
 ## Features
 
 - List students
-- Add new students
-- Edit student details
-- Delete students
+- Add student records
+- Edit student records
+- Delete student records
+- Login system with default admin account
+- Search and filter students
+- Dashboard summary cards
+- Student profile fields for GPA, skills, and projects
+- AI assistant page
 
 ## Setup
 
@@ -19,7 +23,7 @@ A simple command-line student management system written with basic Python and SQ
    pip install -r requirements.txt
    ```
 
-3. Run the server app:
+3. Start the web application:
 
    ```bash
    python server.py
@@ -27,27 +31,20 @@ A simple command-line student management system written with basic Python and SQ
 
 4. Open your browser at `http://localhost:5000`.
 
+## CLI version
+
+You can also run the command-line app:
+
+```bash
+python app.py
+```
+
 ## Login
 
-The web app requires authentication before you can manage students.
-
-- Default username: `admin`
-- Default password: `admin123`
-
-## New features
-
-- Browser-based student management
-- Login required for access
-- Search and filter students by name, email, or course
-- Dashboard stats: total students, average age, and course summary
-- Student profile fields: `gpa`, `skills`, `projects`
-- AI assistant page for help and guidance
-- Background image layout for a nicer look
+- Username: `admin`
+- Password: `admin123`
 
 ## Notes
 
 - Student data is saved in `students.db` automatically.
-- The app uses Flask and SQLite.
-=======
-# STUDENT-MANAGEMENT-SYSTEM
->>>>>>> 323a9ba5fef4be5b382b897accc1aefc86c4d4c2
+- The project uses Flask and SQLite.
